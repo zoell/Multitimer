@@ -4,12 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <fragment android:name="de.softinva.multitimer.fragments.list.AppList"
-        android:id="@+id/headlines_fragment"
+    <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
+        android:layout_height="match_parent" >
+    </androidx.viewpager.widget.ViewPager>
 </LinearLayout>
-
