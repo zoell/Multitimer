@@ -1,6 +1,6 @@
 package de.softinva.multitimer.model;
 
-public enum Tabs {
+public enum TABS {
     List,
     Temp,
     Running;

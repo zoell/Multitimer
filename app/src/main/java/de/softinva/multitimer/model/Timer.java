@@ -1,14 +1,12 @@
 package de.softinva.multitimer.model;
 
-public class AppTimer {
-    public final String id;
+public class Timer {
+    public final Integer id;
     public final String title;
-    public final String description;
     public final Integer durationInSec;
 
-    public AppTimer(String id, String title,String content, Integer durationInSec) {
+    public Timer(Integer id, String title, Integer durationInSec) {
         this.id = id;
-        this.description = content;
         this.durationInSec = durationInSec;
         this.title = title;
     }

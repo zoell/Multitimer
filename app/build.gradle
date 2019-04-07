@@ -15,7 +15,12 @@ android {
         enabled = true
     }
     buildTypes {
+        def loglevel = "logLevel"
+        debug {
+            buildConfigField "String", loglevel, "\"verbose\""
+        }
         release {
+            buildConfigField "String", loglevel, "\"info\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

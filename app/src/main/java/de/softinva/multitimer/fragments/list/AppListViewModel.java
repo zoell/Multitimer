@@ -1,32 +1,29 @@
 package de.softinva.multitimer.fragments.list;
-
-import java.util.List;
+import java.util.TreeMap;
 
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import de.softinva.multitimer.model.AppTimer;
+import de.softinva.multitimer.classes.AppViewModel;
+import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.repository.TimerRepository;
 
-public class AppListViewModel extends ViewModel {
+public class AppListViewModel extends AppViewModel {
 
-    private MutableLiveData<List<AppTimer>> timerList;
-    TimerRepository timerRepo;
+    private MutableLiveData<TreeMap<Integer,Timer>> timerList;
 
 
-    public AppListViewModel(TimerRepository timerRepo) {
-        this.timerRepo = timerRepo;
-    }
 
-    public MutableLiveData<List<AppTimer>> getTimerList() {
+    public MutableLiveData<TreeMap<Integer,Timer>>  getTimerList() {
         if (timerList == null) {
-            timerList = new MutableLiveData<List<AppTimer>>();
+            timerList = new MutableLiveData<>();
             loadTimerList();
         }
         return timerList;
     }
 
     private void loadTimerList() {
-        timerList = this.timerRepo.getTimerList();
+        TreeMap map = TimerRepository.getInstance().getTimerGroups().getValue().get(0).timerMap;
+       this.timerList.setValue(map);
     }
 }
+

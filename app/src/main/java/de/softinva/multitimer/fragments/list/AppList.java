@@ -4,22 +4,22 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import de.softinva.multitimer.factory.AppListViewModelFactory;
-import de.softinva.multitimer.model.AppTimer;
+import de.softinva.multitimer.classes.AppFragment;
+import de.softinva.multitimer.model.Timer;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import java.util.ArrayList;
+
+
 import de.softinva.multitimer.R;
-import de.softinva.multitimer.repository.TimerRepository;
 
 /**
  * A fragment representing a list of Items.
@@ -27,8 +27,9 @@ import de.softinva.multitimer.repository.TimerRepository;
  * Activities containing this fragment MUST implement the {@link OnTimerListInteractionListener}
  * interface.
  */
-public class AppList extends Fragment {
+public class AppList extends AppFragment {
     private OnTimerListInteractionListener mListener;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,9 +47,10 @@ public class AppList extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             }
-            AppListViewModelFactory appListViewModelFactory = new AppListViewModelFactory(new TimerRepository());
-            AppListViewModel model = ViewModelProviders.of(this, appListViewModelFactory).get(AppListViewModel.class);
-            model.getTimerList().observe(this, (timerList) -> recyclerView.setAdapter(new AppListAdapter(timerList, mListener)));
+            AppListViewModel model = ViewModelProviders.of(this).get(AppListViewModel.class);
+            model.getTimerList().observe(this, (timerList) -> {
+                recyclerView.setAdapter(new AppListAdapter(new ArrayList<Timer>(timerList.values()), mListener));
+            });
 
         }
         return view;
@@ -84,6 +86,6 @@ public class AppList extends Fragment {
      */
     public interface OnTimerListInteractionListener {
         // TODO: Update argument type and name
-        void onAppListInteraction(AppTimer timer);
+        void onAppListInteraction(Timer timer);
     }
 }

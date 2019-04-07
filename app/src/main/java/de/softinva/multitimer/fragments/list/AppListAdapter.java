@@ -2,7 +2,7 @@ package de.softinva.multitimer.fragments.list;
 
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.R;
-import de.softinva.multitimer.model.AppTimer;
+import de.softinva.multitimer.model.Timer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +10,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link AppTimer} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Timer} and makes a call to the
  * specified {@link AppList.OnTimerListInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder> {
 
-    private final List<AppTimer> timerList;
+    private final ArrayList<Timer> timerList;
     private final AppList.OnTimerListInteractionListener timerListListener;
 
-    public AppListAdapter(List<AppTimer> timerList, AppList.OnTimerListInteractionListener timerListListener) {
+    public AppListAdapter(ArrayList<Timer> timerList, AppList.OnTimerListInteractionListener timerListListener) {
         this.timerList = timerList;
         this.timerListListener = timerListListener;
     }
@@ -58,7 +59,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         public final View mView;
         public final ImageView mImageView;
         public final TextView mContentView;
-        public AppTimer timer;
+        public Timer timer;
 
         public ViewHolder(View view) {
             super(view);
