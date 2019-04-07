@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 
 import de.softinva.multitimer.R;
+import de.softinva.multitimer.utility.AppRecyclerAdapter;
 
 /**
  * A fragment representing a list of Items.
@@ -49,7 +50,7 @@ public class AppList extends AppFragment {
             }
             AppListViewModel model = ViewModelProviders.of(this).get(AppListViewModel.class);
             model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppListAdapter(new ArrayList<Timer>(timerList.values()), mListener));
+                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.app_list_item , mListener));
             });
 
         }
@@ -84,8 +85,8 @@ public class AppList extends AppFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnTimerListInteractionListener {
+    public interface OnTimerListInteractionListener<T> {
         // TODO: Update argument type and name
-        void onAppListInteraction(Timer timer);
+        void onAppListInteraction(T obj);
     }
 }

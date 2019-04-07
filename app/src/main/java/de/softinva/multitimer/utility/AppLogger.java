@@ -1,4 +1,4 @@
-package de.softinva.multitimer.Utility;
+package de.softinva.multitimer.utility;
 
 import android.util.Log;
 

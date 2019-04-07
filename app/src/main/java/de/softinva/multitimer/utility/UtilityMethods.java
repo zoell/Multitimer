@@ -1,4 +1,4 @@
-package de.softinva.multitimer.Utility;
+package de.softinva.multitimer.utility;
 
 public class UtilityMethods {
     public static AppLogger createLogger(Object classObject) {

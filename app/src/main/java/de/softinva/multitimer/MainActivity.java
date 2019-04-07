@@ -10,7 +10,7 @@ import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.fragments.list.AppList;
 
 
-public class MainActivity extends AppCompatActivity implements AppList.OnTimerListInteractionListener {
+public class MainActivity extends AppCompatActivity implements AppList.OnTimerListInteractionListener<Timer> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

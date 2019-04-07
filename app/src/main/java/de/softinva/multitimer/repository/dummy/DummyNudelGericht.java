@@ -1,7 +1,7 @@
 package de.softinva.multitimer.repository.dummy;
 import java.util.ArrayList;
 
-import de.softinva.multitimer.Utility.AppLogger;
+import de.softinva.multitimer.utility.AppLogger;
 import de.softinva.multitimer.model.DetailedTimer;
 import de.softinva.multitimer.model.TimerGroup;
 
