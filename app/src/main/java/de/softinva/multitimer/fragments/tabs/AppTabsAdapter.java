@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import de.softinva.multitimer.fragments.list.AppList;
-
+import de.softinva.multitimer.fragments.list.running.RunningTimerList;
+import de.softinva.multitimer.fragments.list.temp.TempTimerList;
+import de.softinva.multitimer.fragments.list.timer.TimerList;
 
 
 public class AppTabsAdapter extends FragmentPagerAdapter{
@@ -21,11 +23,13 @@ public class AppTabsAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                return new TimerList();
             case 1:
+                return new TempTimerList();
             case 2:
+                return new RunningTimerList();
             default:
-                AppList tab1 = new AppList();
-                return tab1;
+            throw new Error("position not supported!"+position);
         }
     }
 

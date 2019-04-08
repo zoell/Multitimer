@@ -3,24 +3,14 @@ package de.softinva.multitimer.fragments.list;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import de.softinva.multitimer.classes.AppFragment;
-import de.softinva.multitimer.model.Timer;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-import java.util.ArrayList;
-
-
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.R;
-import de.softinva.multitimer.utility.AppRecyclerAdapter;
+import de.softinva.multitimer.classes.AppFragment;
 
 /**
  * A fragment representing a list of Items.
@@ -28,9 +18,8 @@ import de.softinva.multitimer.utility.AppRecyclerAdapter;
  * Activities containing this fragment MUST implement the {@link OnTimerListInteractionListener}
  * interface.
  */
-public class AppList extends AppFragment {
-    private OnTimerListInteractionListener mListener;
-
+public abstract class AppList extends AppFragment {
+    protected OnTimerListInteractionListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,15 +37,10 @@ public class AppList extends AppFragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             }
-            AppListViewModel model = ViewModelProviders.of(this).get(AppListViewModel.class);
-            model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.app_list_item , mListener));
-            });
 
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {

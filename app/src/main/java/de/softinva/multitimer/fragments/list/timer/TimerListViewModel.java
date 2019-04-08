@@ -1,13 +1,13 @@
-package de.softinva.multitimer.fragments.list;
-import java.util.TreeMap;
+package de.softinva.multitimer.fragments.list.timer;
 
+import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
 import de.softinva.multitimer.classes.AppViewModel;
 import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.repository.TimerRepository;
 
-public class AppListViewModel extends AppViewModel {
+public class TimerListViewModel extends AppViewModel {
 
     private MutableLiveData<TreeMap<Integer,Timer>> timerList;
 

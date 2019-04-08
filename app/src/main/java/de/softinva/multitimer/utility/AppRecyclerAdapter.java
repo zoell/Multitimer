@@ -11,10 +11,11 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.BR;
 import de.softinva.multitimer.fragments.list.AppList;
+import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Object} and makes a call to the
- * specified {@link AppList.OnTimerListInteractionListener}.
+ * specified {@link TimerGroupList.OnTimerListInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  * <p>
  * From https://medium.com/androiddevelopers/android-data-binding-recyclerview-db7c40d9f0e4
@@ -23,7 +24,7 @@ import de.softinva.multitimer.fragments.list.AppList;
 public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
     private final ArrayList<T> objectList;
     private final int layoutId;
-    private final AppList.OnTimerListInteractionListener interactionListener;
+    private final TimerGroupList.OnTimerListInteractionListener interactionListener;
 
     public AppRecyclerAdapter(ArrayList<T> objectList, int layoutId, AppList.OnTimerListInteractionListener interactionListener) {
         this.objectList = objectList;
