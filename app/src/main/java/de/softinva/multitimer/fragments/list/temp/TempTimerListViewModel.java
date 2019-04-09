@@ -11,11 +11,11 @@ import de.softinva.multitimer.repository.TimerRepository;
 
 public class TempTimerListViewModel extends AppViewModel {
 
-    private MutableLiveData<ArrayList<TempTimer>> timerList;
+    private MutableLiveData<TreeMap<Integer,TempTimer>> timerList;
 
 
 
-    public MutableLiveData<ArrayList<TempTimer>>  getTimerList() {
+    public MutableLiveData<TreeMap<Integer,TempTimer>>  getTimerList() {
         if (timerList == null) {
             timerList = new MutableLiveData<>();
             loadTimerList();
@@ -24,7 +24,7 @@ public class TempTimerListViewModel extends AppViewModel {
     }
 
     private void loadTimerList() {
-        ArrayList<TempTimer> tempTimerList = TimerRepository.getInstance().getTempTimer().getValue();
+        TreeMap<Integer,TempTimer> tempTimerList = TimerRepository.getInstance().getTempTimer().getValue();
        this.timerList.setValue(tempTimerList);
     }
 }

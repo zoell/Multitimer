@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -16,18 +17,18 @@ import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Object} and makes a call to the
- * specified {@link TimerGroupList.OnTimerListInteractionListener}.
+ * specified.
  * TODO: Replace the implementation with code for your data type.
  * <p>
  * From https://medium.com/androiddevelopers/android-data-binding-recyclerview-db7c40d9f0e4
  * and from generated code after created new class
  */
 public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
-    private final ArrayList<T> objectList;
-    private final int layoutId;
-    private final OnTimerListInteractionListener interactionListener;
+    protected final TreeMap<Object,T> objectList;
+    protected final int layoutId;
+    protected final OnTimerListInteractionListener interactionListener;
 
-    public AppRecyclerAdapter(ArrayList<T> objectList, int layoutId, AppList interactionListener) {
+    public AppRecyclerAdapter(TreeMap<Object,T> objectList, int layoutId, AppList interactionListener) {
         this.objectList = objectList;
         this.layoutId = layoutId;
         this.interactionListener = interactionListener;
@@ -63,7 +64,8 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
     public int getItemViewType(int position) {
         return layoutId;
     }
-    private T getObjForPosition(int position) {
+
+    protected T getObjForPosition(int position) {
        return  this.objectList.get(position);
     }
 

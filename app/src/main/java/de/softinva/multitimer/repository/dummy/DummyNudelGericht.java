@@ -1,5 +1,6 @@
 package de.softinva.multitimer.repository.dummy;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import de.softinva.multitimer.utility.AppLogger;
 import de.softinva.multitimer.model.DetailedTimer;
@@ -13,19 +14,22 @@ import de.softinva.multitimer.model.TimerGroup;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyNudelGericht {
-    private  final ArrayList<DetailedTimer> TIMER_LIST = new ArrayList<>();
-    private AppLogger logger;
-    public  final TimerGroup TIMER_GROUP;
+    private static final TreeMap<Integer,DetailedTimer> TIMER_LIST = new TreeMap<>();
+    public static final TimerGroup TIMER_GROUP;
+    public static final DetailedTimer TIMER_NUDELN;
+    public static final DetailedTimer TIMER_Tomatensoße;
 
 
-    public DummyNudelGericht() {
-        addItemToTimerList(new DetailedTimer(0, "Nudeln", 480, "Nudeln zum kochen bringen und dann auf mittlere Stufe herunter stellen.", "nudeln.png"));
-        addItemToTimerList(new DetailedTimer(1, "Tomatensoße", 480, "Tomatensoße auf mittlerer Stufe erwärmen.", "nudeln.png"));
+    static {
+        TIMER_NUDELN = new DetailedTimer(0, "Nudeln", 480, "Nudeln zum kochen bringen und dann auf mittlere Stufe herunter stellen.", "nudeln.png");
+        TIMER_Tomatensoße = new DetailedTimer(1, "Tomatensoße", 480, "Tomatensoße auf mittlerer Stufe erwärmen.", "nudeln.png");
+        addItemToTimerList(TIMER_NUDELN);
+        addItemToTimerList(TIMER_Tomatensoße);
         TIMER_GROUP = new TimerGroup(0, "Nudeln", TIMER_LIST);
     }
 
-    private void addItemToTimerList(DetailedTimer timer) {
-        TIMER_LIST.add(timer);
+    private static void addItemToTimerList(DetailedTimer timer) {
+        TIMER_LIST.put(TIMER_LIST.size(),timer);
     }
 
 }

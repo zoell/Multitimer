@@ -1,6 +1,7 @@
 package de.softinva.multitimer.repository.dummy;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import de.softinva.multitimer.model.DetailedTimer;
 import de.softinva.multitimer.model.TempTimer;
@@ -15,16 +16,20 @@ import de.softinva.multitimer.utility.AppLogger;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyTempTimer {
-    private  final ArrayList<DetailedTimer> TIMER_LIST = new ArrayList<>();
-    private AppLogger logger;
-    public  final ArrayList<TempTimer> TEMP_TIMERS;
+    public  static final TreeMap<Integer,TempTimer> TEMP_TIMERS;
+    public static final TempTimer TEMP_TIMER_1;
+    public static final TempTimer TEMP_TIMER_2;
+    public static final TempTimer TEMP_TIMER_3;
 
 
-    public DummyTempTimer() {
-        TEMP_TIMERS = new ArrayList<TempTimer>();
-        TEMP_TIMERS.add(new TempTimer(0, "Temp Timer 1", 600));
-        TEMP_TIMERS.add(new TempTimer(0, "Temp Timer 2", 600));
-        TEMP_TIMERS.add(new TempTimer(0, "Temp Timer 3", 600));
+    static {
+        TEMP_TIMERS = new TreeMap<>();
+        TEMP_TIMER_1 = new TempTimer(0, "Temp Timer 1", 600);
+        TEMP_TIMER_2 = new TempTimer(0, "Temp Timer 2", 600);
+        TEMP_TIMER_3 = new TempTimer(0, "Temp Timer 3", 600);
+        TEMP_TIMERS.put(0,TEMP_TIMER_1);
+        TEMP_TIMERS.put(1, TEMP_TIMER_2);
+        TEMP_TIMERS.put(2,TEMP_TIMER_3);
     }
 
 

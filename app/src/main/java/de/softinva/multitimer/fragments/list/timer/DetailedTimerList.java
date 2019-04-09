@@ -28,7 +28,7 @@ public class DetailedTimerList extends AppList {
             RecyclerView recyclerView = (RecyclerView) view;
             DeteiledTimerListViewModel model = ViewModelProviders.of(this).get(DeteiledTimerListViewModel.class);
             model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.detailed_timer_list_item, this));
+                recyclerView.setAdapter(new AppRecyclerAdapter(timerList, R.layout.detailed_timer_list_item, this));
             });
         } else {
             logger.error("view not instance of RecyclerView!");

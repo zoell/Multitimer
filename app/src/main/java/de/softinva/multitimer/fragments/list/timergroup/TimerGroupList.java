@@ -32,7 +32,7 @@ public class TimerGroupList extends AppList {
             RecyclerView recyclerView = (RecyclerView) view;
             TimerGroupListViewModel model = ViewModelProviders.of(this).get(TimerGroupListViewModel.class);
             model.getTimerGroupList().observe(this, (timeGroups) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<TimerGroup>(timeGroups.values()), R.layout.timer_group_list_item, this));
+                recyclerView.setAdapter(new AppRecyclerAdapter(timeGroups, R.layout.timer_group_list_item, this));
             });
         } else {
             logger.error("view not instance of RecyclerView!");

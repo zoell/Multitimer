@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="obj" type="de.softinva.multitimer.model.DetailedTimer" />
+        <variable name="obj" type="de.softinva.multitimer.model.Timer" />
     </data>
 
     <LinearLayout

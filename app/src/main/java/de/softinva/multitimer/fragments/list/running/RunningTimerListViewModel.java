@@ -22,7 +22,7 @@ public class RunningTimerListViewModel extends AppViewModel {
     }
 
     private void loadTimerList() {
-        TreeMap map = TimerRepository.getInstance().getTimerGroups().getValue().get(0).timerMap;
+        TreeMap map = TimerRepository.getInstance().getRunningTimer().getValue();
        this.timerList.setValue(map);
     }
 }

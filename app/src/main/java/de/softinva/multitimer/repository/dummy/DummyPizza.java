@@ -1,6 +1,7 @@
 package de.softinva.multitimer.repository.dummy;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import de.softinva.multitimer.model.DetailedTimer;
 import de.softinva.multitimer.model.TimerGroup;
@@ -14,18 +15,19 @@ import de.softinva.multitimer.utility.AppLogger;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyPizza {
-    private  final ArrayList<DetailedTimer> TIMER_LIST = new ArrayList<>();
-    private AppLogger logger;
-    public  final TimerGroup TIMER_GROUP;
+    private  static final TreeMap<Integer,DetailedTimer> TIMER_LIST = new TreeMap<>();
+    public  static final TimerGroup TIMER_GROUP;
+    public static final DetailedTimer TIMER_PIZZA;
 
 
-    public DummyPizza() {
-        addItemToTimerList(new DetailedTimer(0, " Pizza backen", 900, "Tiefgefrorene Pizza in den Ofen tun. Ofen muss nicht vorgeheizt werden.", "pizza.png"));
+    static {
+        TIMER_PIZZA = new DetailedTimer(0, " Pizza backen", 900, "Tiefgefrorene Pizza in den Ofen tun. Ofen muss nicht vorgeheizt werden.", "pizza.png");
+        addItemToTimerList(TIMER_PIZZA);
         TIMER_GROUP = new TimerGroup(0, "Pizza", TIMER_LIST);
     }
 
-    private void addItemToTimerList(DetailedTimer timer) {
-        TIMER_LIST.add(timer);
+    private static void addItemToTimerList(DetailedTimer timer) {
+        TIMER_LIST.put(TIMER_LIST.size(),timer);
     }
 
 }
