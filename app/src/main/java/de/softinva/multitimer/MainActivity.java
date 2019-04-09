@@ -8,9 +8,10 @@ import java.util.logging.LogManager;
 
 import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.fragments.list.AppList;
+import de.softinva.multitimer.model.TimerGroup;
 
 
-public class MainActivity extends AppCompatActivity implements AppList.OnTimerListInteractionListener<Timer> {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +19,6 @@ public class MainActivity extends AppCompatActivity implements AppList.OnTimerLi
         setContentView(R.layout.activity_main);
         setLoggingConfiguration();
 
-    }
-
-    @Override
-    public void onAppListInteraction(Timer timer) {
-        System.out.println(timer.title);
     }
 
     private void setLoggingConfiguration() {

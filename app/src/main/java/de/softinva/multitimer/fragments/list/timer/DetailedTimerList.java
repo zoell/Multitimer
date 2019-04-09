@@ -17,10 +17,8 @@ import de.softinva.multitimer.utility.AppRecyclerAdapter;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link AppList.OnTimerListInteractionListener}
- * interface.
  */
-public class TimerList extends AppList {
+public class DetailedTimerList extends AppList {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,9 +26,9 @@ public class TimerList extends AppList {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
-            TimerListViewModel model = ViewModelProviders.of(this).get(TimerListViewModel.class);
+            DeteiledTimerListViewModel model = ViewModelProviders.of(this).get(DeteiledTimerListViewModel.class);
             model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.app_list_item, mListener));
+                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.detailed_timer_list_item, this));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
@@ -39,4 +37,8 @@ public class TimerList extends AppList {
         return view;
     }
 
+    @Override
+    public void onAppListInteraction(Object obj) {
+
+    }
 }

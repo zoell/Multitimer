@@ -4,16 +4,17 @@ import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
 import de.softinva.multitimer.classes.AppViewModel;
+import de.softinva.multitimer.model.DetailedTimer;
 import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.repository.TimerRepository;
 
-public class TimerListViewModel extends AppViewModel {
+public class DeteiledTimerListViewModel extends AppViewModel {
 
-    private MutableLiveData<TreeMap<Integer,Timer>> timerList;
+    private MutableLiveData<TreeMap<Integer, DetailedTimer>> timerList;
 
 
 
-    public MutableLiveData<TreeMap<Integer,Timer>>  getTimerList() {
+    public MutableLiveData<TreeMap<Integer,DetailedTimer>>  getTimerList() {
         if (timerList == null) {
             timerList = new MutableLiveData<>();
             loadTimerList();

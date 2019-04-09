@@ -9,4 +9,4 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     tools:context=".fragments.list.timergroup.TimerGroupList"
-    tools:listitem="@layout/app_list_item" />
+    tools:listitem="@layout/detailed_timer_list_item" />

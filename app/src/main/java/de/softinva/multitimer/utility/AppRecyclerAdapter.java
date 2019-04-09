@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.BR;
 import de.softinva.multitimer.fragments.list.AppList;
+import de.softinva.multitimer.classes.OnTimerListInteractionListener;
 import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 
 /**
@@ -24,9 +25,9 @@ import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
     private final ArrayList<T> objectList;
     private final int layoutId;
-    private final TimerGroupList.OnTimerListInteractionListener interactionListener;
+    private final OnTimerListInteractionListener interactionListener;
 
-    public AppRecyclerAdapter(ArrayList<T> objectList, int layoutId, AppList.OnTimerListInteractionListener interactionListener) {
+    public AppRecyclerAdapter(ArrayList<T> objectList, int layoutId, AppList interactionListener) {
         this.objectList = objectList;
         this.layoutId = layoutId;
         this.interactionListener = interactionListener;

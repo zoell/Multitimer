@@ -16,13 +16,11 @@ import java.util.ArrayList;
 
 
 import de.softinva.multitimer.R;
+import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.utility.AppRecyclerAdapter;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link AppList.OnTimerListInteractionListener}
- * interface.
  */
 public class TimerGroupList extends AppList {
 
@@ -33,8 +31,8 @@ public class TimerGroupList extends AppList {
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
             TimerGroupListViewModel model = ViewModelProviders.of(this).get(TimerGroupListViewModel.class);
-            model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.app_list_item, mListener));
+            model.getTimerGroupList().observe(this, (timeGroups) -> {
+                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<TimerGroup>(timeGroups.values()), R.layout.timer_group_list_item, this));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
@@ -44,4 +42,8 @@ public class TimerGroupList extends AppList {
     }
 
 
+    @Override
+    public void onAppListInteraction(Object obj) {
+
+    }
 }

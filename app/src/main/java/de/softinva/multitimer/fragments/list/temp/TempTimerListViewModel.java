@@ -1,19 +1,21 @@
 package de.softinva.multitimer.fragments.list.temp;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
 import de.softinva.multitimer.classes.AppViewModel;
+import de.softinva.multitimer.model.TempTimer;
 import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.repository.TimerRepository;
 
 public class TempTimerListViewModel extends AppViewModel {
 
-    private MutableLiveData<TreeMap<Integer,Timer>> timerList;
+    private MutableLiveData<ArrayList<TempTimer>> timerList;
 
 
 
-    public MutableLiveData<TreeMap<Integer,Timer>>  getTimerList() {
+    public MutableLiveData<ArrayList<TempTimer>>  getTimerList() {
         if (timerList == null) {
             timerList = new MutableLiveData<>();
             loadTimerList();
@@ -22,8 +24,8 @@ public class TempTimerListViewModel extends AppViewModel {
     }
 
     private void loadTimerList() {
-        TreeMap map = TimerRepository.getInstance().getTimerGroups().getValue().get(0).timerMap;
-       this.timerList.setValue(map);
+        ArrayList<TempTimer> tempTimerList = TimerRepository.getInstance().getTempTimer().getValue();
+       this.timerList.setValue(tempTimerList);
     }
 }
 

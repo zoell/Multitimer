@@ -15,10 +15,7 @@ import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.utility.AppRecyclerAdapter;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link AppList.OnTimerListInteractionListener}
- * interface.
+ * A fragment representing a list of Items..
  */
 public class RunningTimerList extends AppList {
 
@@ -30,12 +27,17 @@ public class RunningTimerList extends AppList {
             RecyclerView recyclerView = (RecyclerView) view;
             RunningTimerListViewModel model = ViewModelProviders.of(this).get(RunningTimerListViewModel.class);
             model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.app_list_item, mListener));
+                recyclerView.setAdapter(new AppRecyclerAdapter(new ArrayList<Timer>(timerList.values()), R.layout.running_timer_list_item, this));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
         }
 
         return view;
+    }
+
+    @Override
+    public void onAppListInteraction(Object obj) {
+
     }
 }

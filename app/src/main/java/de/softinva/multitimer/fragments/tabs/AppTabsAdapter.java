@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import de.softinva.multitimer.fragments.list.AppList;
 import de.softinva.multitimer.fragments.list.running.RunningTimerList;
 import de.softinva.multitimer.fragments.list.temp.TempTimerList;
-import de.softinva.multitimer.fragments.list.timer.TimerList;
+import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 
 
 public class AppTabsAdapter extends FragmentPagerAdapter{
@@ -23,7 +22,7 @@ public class AppTabsAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new TimerList();
+                return new TimerGroupList();
             case 1:
                 return new TempTimerList();
             case 2:
