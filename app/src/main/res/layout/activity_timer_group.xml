@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <fragment
         android:id="@+id/headlines_fragment"
-        android:name="de.softinva.multitimer.fragments.tabs.mainactivity.MainActivityTabs"
+        android:name="de.softinva.multitimer.fragments.tabs.timergroupactivity.TimerGroupTabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

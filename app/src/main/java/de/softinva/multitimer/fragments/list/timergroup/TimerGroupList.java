@@ -1,18 +1,16 @@
 package de.softinva.multitimer.fragments.list.timergroup;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+import de.softinva.multitimer.TimerGroupActivity;
 import de.softinva.multitimer.fragments.list.AppList;
-import de.softinva.multitimer.model.Timer;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-import java.util.ArrayList;
 
 
 import de.softinva.multitimer.R;
@@ -44,6 +42,13 @@ public class TimerGroupList extends AppList {
 
     @Override
     public void onAppListInteraction(Object obj) {
+     if(obj instanceof TimerGroup){
+         TimerGroup timerGroup = (TimerGroup) obj;
+         Intent intent = new Intent(getActivity(),TimerGroupActivity.class);
+         intent.putExtra(TimerGroupActivity.GROUP_ID, timerGroup.id);
+         startActivity(intent);
 
+
+     }
     }
 }

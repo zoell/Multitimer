@@ -1,4 +1,4 @@
-package de.softinva.multitimer.fragments.tabs;
+package de.softinva.multitimer.fragments.tabs.mainactivity;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -17,15 +17,15 @@ import de.softinva.multitimer.MainActivityViewModel;
 import de.softinva.multitimer.R;
 import de.softinva.multitimer.model.TABS;
 
-public class AppTabs extends Fragment {
+public class MainActivityTabs extends Fragment {
 
-    private AppTabsViewModel mViewModel;
-    private AppTabsAdapter appTabsAdapter;
+    private MainActivityTabsViewModel mViewModel;
+    private MainActivityTabsAdapter appTabsAdapter;
     ViewPager viewPager;
     String[] tabTitel;
 
-    public static AppTabs newInstance() {
-        return new AppTabs();
+    public static MainActivityTabs newInstance() {
+        return new MainActivityTabs();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AppTabs extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AppTabsViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(MainActivityTabsViewModel.class);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AppTabs extends Fragment {
         tabTitel[0] = getString(R.string.tab_title_1);
         tabTitel[1] = getString(R.string.tab_title_2);
         tabTitel[2] = getString(R.string.tab_title_3);
-        appTabsAdapter = new AppTabsAdapter(getChildFragmentManager(), this.tabTitel);
+        appTabsAdapter = new MainActivityTabsAdapter(getChildFragmentManager(), this.tabTitel);
         viewPager = view.findViewById(R.id.pager);
         viewPager.setAdapter(appTabsAdapter);
         viewPager.addOnPageChangeListener(this.onPageChangeListener);

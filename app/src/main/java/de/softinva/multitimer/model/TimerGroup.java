@@ -7,7 +7,7 @@ import java.util.TreeMap;
 public class TimerGroup {
     public final Integer id;
     public final String title;
-    public final TreeMap<Integer, Timer> timerMap;
+    public final TreeMap<Integer, DetailedTimer> timerMap;
 
     public TimerGroup(Integer id, String title, TreeMap<Integer,DetailedTimer> timerMap) {
         this.id = id;

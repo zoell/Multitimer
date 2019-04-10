@@ -1,4 +1,4 @@
-package de.softinva.multitimer.fragments.tabs;
+package de.softinva.multitimer.fragments.tabs.mainactivity;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,9 +10,9 @@ import de.softinva.multitimer.fragments.list.temp.TempTimerList;
 import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 
 
-public class AppTabsAdapter extends FragmentPagerAdapter{
+public class MainActivityTabsAdapter extends FragmentPagerAdapter{
     String[] tabTitel;
-    public AppTabsAdapter(FragmentManager fm, String[] tabTitles) {
+    public MainActivityTabsAdapter(FragmentManager fm, String[] tabTitles) {
         super(fm);
         this.tabTitel = tabTitles;
     }

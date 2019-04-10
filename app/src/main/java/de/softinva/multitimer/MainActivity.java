@@ -17,18 +17,5 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setLoggingConfiguration();
-
-    }
-
-    private void setLoggingConfiguration() {
-        System.setProperty("java.util.logging.config.file", "logging.properties");
-
-
-        try {
-            LogManager.getLogManager().readConfiguration();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
