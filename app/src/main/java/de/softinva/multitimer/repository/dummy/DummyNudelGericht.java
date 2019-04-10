@@ -25,7 +25,7 @@ public class DummyNudelGericht {
         TIMER_Tomatensoße = new DetailedTimer(1, "Tomatensoße", 480, "Tomatensoße auf mittlerer Stufe erwärmen.", "nudeln.png");
         addItemToTimerList(TIMER_NUDELN);
         addItemToTimerList(TIMER_Tomatensoße);
-        TIMER_GROUP = new TimerGroup(0, "Nudeln", TIMER_LIST);
+        TIMER_GROUP = new TimerGroup(0, "Nudeln", false, TIMER_LIST);
     }
 
     private static void addItemToTimerList(DetailedTimer timer) {

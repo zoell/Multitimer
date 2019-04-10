@@ -8,11 +8,13 @@ public class TimerGroup {
     public final Integer id;
     public final String title;
     public final TreeMap<Integer, DetailedTimer> timerMap;
+    public final boolean isZipped;
 
-    public TimerGroup(Integer id, String title, TreeMap<Integer,DetailedTimer> timerMap) {
+    public TimerGroup(Integer id, String title, boolean isZipped, TreeMap<Integer,DetailedTimer> timerMap) {
         this.id = id;
         this.title = title;
         this.timerMap = new TreeMap();
+        this.isZipped = isZipped;
         for(Map.Entry<Integer,DetailedTimer> timerEntry: timerMap.entrySet()){
             this.timerMap.put(timerEntry.getValue().id, timerEntry.getValue());
         }

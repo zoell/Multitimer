@@ -11,6 +11,7 @@ import de.softinva.multitimer.fragments.list.AppList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 import java.util.Map;
@@ -44,9 +45,15 @@ public class TimerGroupList extends AppList {
 
     public TreeMap<Integer, TimerGroupViewObject> createViewObject(TreeMap<Integer, TimerGroup> timerGroups) {
         TreeMap<Integer, TimerGroupViewObject> timerGroupMap = new TreeMap<>();
-        for(Map.Entry<Integer,TimerGroup> entry: timerGroups.entrySet()){
-            TimerGroupViewObject timerGroupViewObject = new TimerGroupViewObject(entry.getValue());
-            timerGroupMap.put(entry.getKey(),timerGroupViewObject);
+        for (Map.Entry<Integer, TimerGroup> entry : timerGroups.entrySet()) {
+            TimerGroup timerGroup = entry.getValue();
+            TimerGroupViewObject timerGroupViewObject = new TimerGroupViewObject(timerGroup);
+            if (timerGroup.isZipped) {
+                timerGroupViewObject.buttonSrcCompat = R.drawable.ic_av_timer_black_24dp;
+            } else {
+                timerGroupViewObject.buttonSrcCompat = R.drawable.ic_chevron_right_black_24dp;
+            }
+            timerGroupMap.put(entry.getKey(), timerGroupViewObject);
         }
         return timerGroupMap;
     }

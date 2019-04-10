@@ -60,7 +60,7 @@
                     android:layout_marginRight="@dimen/item_margin"
                     android:contentDescription="Image"
                     android:tint="@color/colorAccent"
-                    app:srcCompat="@drawable/ic_av_timer_black_24dp"
+                    android:src="@{obj.buttonSrcCompat}"
                     android:onClickListener="@{obj::onClickButton}"/>
             </LinearLayout>
 
