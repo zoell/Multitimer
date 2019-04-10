@@ -23,7 +23,7 @@ public class TimerGroupTabsAdapter extends FragmentPagerAdapter{
         switch (position) {
             case 0:
                 return new DetailedTimerList();
-            case 2:
+            case 1:
                 return new RunningTimerList();
             default:
             throw new Error("position not supported!"+position);

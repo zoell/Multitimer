@@ -1,5 +1,6 @@
 package de.softinva.multitimer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -14,9 +15,18 @@ public class TimerGroupActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_group);
-        Integer groupId = savedInstanceState.getInt(GROUP_ID);
-        TimerGroupViewModel model = ViewModelProviders.of(this).get(TimerGroupViewModel.class);
-        model.getTimerGroupId().setValue(groupId);
+
+        Intent intent = getIntent();
+        int groupId = intent.getIntExtra(GROUP_ID, -1);
+
+        if(groupId != -1){
+            TimerGroupViewModel model = ViewModelProviders.of(this).get(TimerGroupViewModel.class);
+            model.getTimerGroupId().setValue(groupId);
+            setTitle(model.getTimerGroup().getValue().title);
+        }else{
+            throw new Error("groupId is -1!");
+        }
+
     }
 
 }
