@@ -26,12 +26,10 @@ import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
     protected final TreeMap<Object,T> objectList;
     protected final int layoutId;
-    protected final OnTimerListInteractionListener interactionListener;
 
-    public AppRecyclerAdapter(TreeMap<Object,T> objectList, int layoutId, AppList interactionListener) {
+    public AppRecyclerAdapter(TreeMap<Object,T> objectList, int layoutId) {
         this.objectList = objectList;
         this.layoutId = layoutId;
-        this.interactionListener = interactionListener;
     }
 
     public AppViewHolder onCreateViewHolder(ViewGroup parent,
@@ -47,13 +45,6 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
                                  int position) {
         Object obj = getObjForPosition(position);
         holder.bind(obj);
-        holder.view.setOnClickListener(v -> {
-            if (null != interactionListener) {
-                // Notify the active callbacks interface (the activity, if the
-                // fragment is attached to one) that an item has been selected.
-                interactionListener.onAppListInteraction(obj);
-            }
-        });
     }
     @Override
     public int getItemCount() {
@@ -72,12 +63,10 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
 }
 
 class AppViewHolder extends RecyclerView.ViewHolder {
-    public final View view;
     private final ViewDataBinding binding;
 
     public AppViewHolder(ViewDataBinding binding) {
         super(binding.getRoot());
-        view = binding.getRoot();
         this.binding = binding;
     }
 

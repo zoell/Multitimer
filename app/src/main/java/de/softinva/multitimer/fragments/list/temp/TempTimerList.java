@@ -26,17 +26,12 @@ public class TempTimerList extends AppList {
             RecyclerView recyclerView = (RecyclerView) view;
             TempTimerListViewModel model = ViewModelProviders.of(this).get(TempTimerListViewModel.class);
             model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(timerList, R.layout.temp_timer_list_item, this));
+                recyclerView.setAdapter(new AppRecyclerAdapter(timerList, R.layout.temp_timer_list_item));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
         }
 
         return view;
-    }
-
-    @Override
-    public void onAppListInteraction(Object obj) {
-
     }
 }

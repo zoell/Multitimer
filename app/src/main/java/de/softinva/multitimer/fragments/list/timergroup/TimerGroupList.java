@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import de.softinva.multitimer.R;
 import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.utility.AppRecyclerAdapter;
@@ -29,8 +32,8 @@ public class TimerGroupList extends AppList {
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
             TimerGroupListViewModel model = ViewModelProviders.of(this).get(TimerGroupListViewModel.class);
-            model.getTimerGroupList().observe(this, (timeGroups) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(timeGroups, R.layout.timer_group_list_item, this));
+            model.getTimerGroupList().observe(this, (timerGroups) -> {
+                recyclerView.setAdapter(new AppRecyclerAdapter(createViewObject(timerGroups), R.layout.timer_group_list_item));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
@@ -39,16 +42,12 @@ public class TimerGroupList extends AppList {
         return view;
     }
 
-
-    @Override
-    public void onAppListInteraction(Object obj) {
-     if(obj instanceof TimerGroup){
-         TimerGroup timerGroup = (TimerGroup) obj;
-         Intent intent = new Intent(getActivity(),TimerGroupActivity.class);
-         intent.putExtra(TimerGroupActivity.GROUP_ID, timerGroup.id);
-         startActivity(intent);
-
-
-     }
+    public TreeMap<Integer, TimerGroupViewObject> createViewObject(TreeMap<Integer, TimerGroup> timerGroups) {
+        TreeMap<Integer, TimerGroupViewObject> timerGroupMap = new TreeMap<>();
+        for(Map.Entry<Integer,TimerGroup> entry: timerGroups.entrySet()){
+            TimerGroupViewObject timerGroupViewObject = new TimerGroupViewObject(entry.getValue());
+            timerGroupMap.put(entry.getKey(),timerGroupViewObject);
+        }
+        return timerGroupMap;
     }
 }

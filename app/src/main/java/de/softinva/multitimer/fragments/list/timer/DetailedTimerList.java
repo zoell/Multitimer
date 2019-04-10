@@ -28,7 +28,7 @@ public class DetailedTimerList extends AppList {
             TimerGroupViewModel activityModel = ViewModelProviders.of(getActivity()).get(TimerGroupViewModel.class);
             activityModel.getTimerGroupId().observe(this, (groupId) -> {
                 model.getTimerList(groupId).observe(this, (timerList) -> {
-                    recyclerView.setAdapter(new AppRecyclerAdapter(timerList, R.layout.detailed_timer_list_item, this));
+                    recyclerView.setAdapter(new AppRecyclerAdapter(timerList, R.layout.detailed_timer_list_item));
                 });
             });
 
@@ -37,10 +37,5 @@ public class DetailedTimerList extends AppList {
         }
 
         return view;
-    }
-
-    @Override
-    public void onAppListInteraction(Object obj) {
-
     }
 }

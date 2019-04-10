@@ -19,7 +19,7 @@ import de.softinva.multitimer.classes.OnTimerListInteractionListener;
  * Activities containing this fragment MUST implement the {@link OnTimerListInteractionListener}
  * interface.
  */
-public abstract class AppList extends AppFragment implements OnTimerListInteractionListener {
+public abstract class AppList extends AppFragment{
     protected OnTimerListInteractionListener mListener;
 
     @Override
