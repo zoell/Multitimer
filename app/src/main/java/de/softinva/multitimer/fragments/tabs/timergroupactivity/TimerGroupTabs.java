@@ -61,7 +61,7 @@ public class TimerGroupTabs extends Fragment {
 
         @Override
         public void onPageSelected(int position) {
-            MainActivityViewModel  model = ViewModelProviders.of(getActivity()).get(MainActivityViewModel.class);
+            TimerGroupViewModel  model = ViewModelProviders.of(getActivity()).get(TimerGroupViewModel.class);
             model.getActiveTab().setValue(TABS.values()[position]);
         }
 

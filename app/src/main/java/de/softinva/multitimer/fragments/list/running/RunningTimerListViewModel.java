@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import de.softinva.multitimer.classes.AppViewModel;
 import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.repository.TimerRepository;
+import de.softinva.multitimer.utility.UtilityMethods;
 
 public class RunningTimerListViewModel extends AppViewModel {
 
@@ -35,7 +36,7 @@ public class RunningTimerListViewModel extends AppViewModel {
     }
     private void loadTimerListForGroup(Integer groupId) {
         TreeMap map = TimerRepository.getInstance().getRunningTimer().getValue();
-        this.timerList.setValue(map);
+        this.timerListForGroup.setValue(UtilityMethods.getTimerListForGroup(groupId,map));
     }
 }
 

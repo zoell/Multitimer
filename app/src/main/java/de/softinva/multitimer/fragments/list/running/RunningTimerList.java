@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+import de.softinva.multitimer.MainActivity;
 import de.softinva.multitimer.R;
+import de.softinva.multitimer.TimerGroupActivity;
+import de.softinva.multitimer.TimerGroupViewModel;
 import de.softinva.multitimer.fragments.list.AppList;
 import de.softinva.multitimer.utility.AppRunningTimerRecyclerAdapter;
 
@@ -23,9 +26,20 @@ public class RunningTimerList extends AppList {
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
             RunningTimerListViewModel model = ViewModelProviders.of(this).get(RunningTimerListViewModel.class);
-            model.getTimerList().observe(this, (timerList) -> {
-                recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(timerList, R.layout.running_timer_list_item));
-            });
+            if (getActivity() instanceof TimerGroupActivity) {
+                TimerGroupViewModel activityModel = ViewModelProviders.of(getActivity()).get(TimerGroupViewModel.class);
+                activityModel.getTimerGroupId().observe(this, (groupId) -> {
+                    model.getTimerListForGroup(groupId).observe(this, (timerList) -> {
+                        recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(timerList, R.layout.detailed_timer_list_item));
+                    });
+                });
+            } else {
+                model.getTimerList().observe(this, (timerList) -> {
+                    recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(timerList, R.layout.running_timer_list_item));
+                });
+            }
+
+
         } else {
             logger.error("view not instance of RecyclerView!");
         }
