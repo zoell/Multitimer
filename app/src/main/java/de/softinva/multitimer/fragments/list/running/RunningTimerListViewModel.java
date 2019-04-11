@@ -10,6 +10,7 @@ import de.softinva.multitimer.repository.TimerRepository;
 public class RunningTimerListViewModel extends AppViewModel {
 
     private MutableLiveData<TreeMap<Integer,Timer>> timerList;
+    private MutableLiveData<TreeMap<Integer,Timer>> timerListForGroup;
 
 
 
@@ -24,6 +25,17 @@ public class RunningTimerListViewModel extends AppViewModel {
     private void loadTimerList() {
         TreeMap map = TimerRepository.getInstance().getRunningTimer().getValue();
        this.timerList.setValue(map);
+    }
+    public MutableLiveData<TreeMap<Integer,Timer>>  getTimerListForGroup(Integer groupId) {
+        if (timerListForGroup == null) {
+            timerListForGroup = new MutableLiveData<>();
+            loadTimerListForGroup(groupId);
+        }
+        return timerListForGroup;
+    }
+    private void loadTimerListForGroup(Integer groupId) {
+        TreeMap map = TimerRepository.getInstance().getRunningTimer().getValue();
+        this.timerList.setValue(map);
     }
 }
 
