@@ -4,22 +4,23 @@ import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import de.softinva.multitimer.model.DetailedTimer;
+import de.softinva.multitimer.classes.ActivityViewModel;
+import de.softinva.multitimer.model.MAIN_ACTIVITY_TABS;
 import de.softinva.multitimer.model.TABS;
+import de.softinva.multitimer.model.TIMER_GROUP_ACTIVITY_TABS;
 import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.repository.TimerRepository;
 import de.softinva.multitimer.utility.UtilityMethods;
 
-import static de.softinva.multitimer.utility.UtilityMethods.getTimerGroup;
-
-public class TimerGroupViewModel extends ViewModel {
+public class TimerGroupViewModel extends ActivityViewModel {
     private MutableLiveData<TABS> activeTab;
     private MutableLiveData<Integer> timerGroupId;
     private MutableLiveData<TimerGroup> timerGroup;
 
+    @Override
     public MutableLiveData<TABS> getActiveTab() {
         if (activeTab == null) {
-            activeTab = new MutableLiveData<TABS>();
+            activeTab = new MutableLiveData<>();
         }
         return activeTab;
     }

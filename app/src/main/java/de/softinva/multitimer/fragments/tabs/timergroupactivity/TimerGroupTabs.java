@@ -10,10 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
-import de.softinva.multitimer.MainActivityViewModel;
 import de.softinva.multitimer.R;
 import de.softinva.multitimer.TimerGroupViewModel;
-import de.softinva.multitimer.model.TABS;
+import de.softinva.multitimer.model.MAIN_ACTIVITY_TABS;
+import de.softinva.multitimer.model.TIMER_GROUP_ACTIVITY_TABS;
 
 public class TimerGroupTabs extends Fragment {
 
@@ -62,7 +62,7 @@ public class TimerGroupTabs extends Fragment {
         @Override
         public void onPageSelected(int position) {
             TimerGroupViewModel  model = ViewModelProviders.of(getActivity()).get(TimerGroupViewModel.class);
-            model.getActiveTab().setValue(TABS.values()[position]);
+            model.getActiveTab().setValue(TIMER_GROUP_ACTIVITY_TABS.values()[position]);
         }
 
         @Override

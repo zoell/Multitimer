@@ -11,9 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.BR;
-import de.softinva.multitimer.fragments.list.AppList;
-import de.softinva.multitimer.classes.OnTimerListInteractionListener;
-import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Object} and makes a call to the

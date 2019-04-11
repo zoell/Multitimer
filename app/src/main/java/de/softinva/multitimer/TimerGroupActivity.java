@@ -5,28 +5,72 @@ import android.os.Bundle;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import de.softinva.multitimer.classes.AppActivity;
+import de.softinva.multitimer.fragments.list.running.RunningTimerList;
+import de.softinva.multitimer.fragments.list.timer.DetailedTimerList;
+import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
+import de.softinva.multitimer.model.MAIN_ACTIVITY_TABS;
+import de.softinva.multitimer.model.TABS;
+import de.softinva.multitimer.model.TIMER_GROUP_ACTIVITY_TABS;
 
 
-public class TimerGroupActivity extends AppCompatActivity{
+public class TimerGroupActivity extends AppActivity {
     public static final String GROUP_ID = "de.softinva.multitimer.groupId";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_group);
 
-        Intent intent = getIntent();
+        setViewIfOrientationLandscape();
+
+        setGroupIdAndTitle();
+    }
+
+    protected void setGroupIdAndTitle() {
         int groupId = intent.getIntExtra(GROUP_ID, -1);
 
-        if(groupId != -1){
-            TimerGroupViewModel model = ViewModelProviders.of(this).get(TimerGroupViewModel.class);
+        if (groupId != -1) {
+            TimerGroupViewModel model = (TimerGroupViewModel) this.model;
             model.getTimerGroupId().setValue(groupId);
             setTitle(model.getTimerGroup().getValue().title);
-        }else{
+        } else {
             throw new Error("groupId is -1!");
         }
+    }
 
+    @Override
+    protected Fragment selectFragment() {
+        Fragment fragment;
+
+        TIMER_GROUP_ACTIVITY_TABS tab = (TIMER_GROUP_ACTIVITY_TABS) model.getActiveTab().getValue();
+        switch (tab) {
+            case List:
+                fragment = new DetailedTimerList();
+                break;
+            case Running:
+                fragment = new RunningTimerList();
+                break;
+            default:
+                throw new Error("active tab is not supported!");
+        }
+        return fragment;
+    }
+
+    @Override
+    protected void setModel() {
+        model = ViewModelProviders.of(this).get(TimerGroupViewModel.class);
+    }
+
+    @Override
+    protected void setActiveTab() {
+        if(model.getActiveTab().getValue() == null){
+            model.getActiveTab().setValue(TIMER_GROUP_ACTIVITY_TABS.List);
+        }
     }
 
 }

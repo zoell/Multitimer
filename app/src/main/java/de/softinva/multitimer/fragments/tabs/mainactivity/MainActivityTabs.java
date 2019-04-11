@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import androidx.viewpager.widget.ViewPager;
 import de.softinva.multitimer.MainActivityViewModel;
 import de.softinva.multitimer.R;
-import de.softinva.multitimer.model.TABS;
+import de.softinva.multitimer.model.MAIN_ACTIVITY_TABS;
 
 public class MainActivityTabs extends Fragment {
 
@@ -61,7 +61,7 @@ public class MainActivityTabs extends Fragment {
         @Override
         public void onPageSelected(int position) {
             MainActivityViewModel  model = ViewModelProviders.of(getActivity()).get(MainActivityViewModel.class);
-            model.getActiveTab().setValue(TABS.values()[position]);
+            model.getActiveTab().setValue(MAIN_ACTIVITY_TABS.values()[position]);
         }
 
         @Override
