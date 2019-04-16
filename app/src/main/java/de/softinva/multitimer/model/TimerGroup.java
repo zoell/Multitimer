@@ -8,10 +8,10 @@ import de.softinva.multitimer.fragments.list.timergroup.TimerGroupViewObject;
 public class TimerGroup implements AppPOJO {
     public final String id;
     public final String title;
-    public final TreeMap<Integer, DetailedTimer> timerMap;
+    public final TreeMap<Integer, RunningTimer> timerMap;
     public final boolean isZipped;
 
-    public TimerGroup(String id, String title, boolean isZipped, TreeMap<Integer,DetailedTimer> timerMap) {
+    public TimerGroup(String id, String title, boolean isZipped, TreeMap<Integer,RunningTimer> timerMap) {
         this.id = id;
         this.title = title;
         this.timerMap = timerMap;

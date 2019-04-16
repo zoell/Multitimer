@@ -2,6 +2,7 @@ package de.softinva.multitimer.repository.dummy;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import de.softinva.multitimer.model.RunningTimer;
 import de.softinva.multitimer.utility.AppLogger;
 import de.softinva.multitimer.model.DetailedTimer;
 import de.softinva.multitimer.model.TimerGroup;
@@ -14,7 +15,7 @@ import de.softinva.multitimer.model.TimerGroup;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyNudelGericht {
-    private static final TreeMap<Integer,DetailedTimer> TIMER_LIST = new TreeMap<>();
+    private static final TreeMap<Integer,RunningTimer> TIMER_LIST = new TreeMap<>();
     public static final TimerGroup TIMER_GROUP;
     public static final DetailedTimer TIMER_NUDELN;
     public static final DetailedTimer TIMER_Tomatensoße;
@@ -29,7 +30,7 @@ public class DummyNudelGericht {
     }
 
     private static void addItemToTimerList(DetailedTimer timer) {
-        TIMER_LIST.put(TIMER_LIST.size(),timer);
+        TIMER_LIST.put(TIMER_LIST.size(), new RunningTimer(timer));
     }
 
 }
