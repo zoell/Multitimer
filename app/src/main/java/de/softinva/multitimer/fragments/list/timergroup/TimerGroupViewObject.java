@@ -5,15 +5,22 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
+import de.softinva.multitimer.R;
 import de.softinva.multitimer.TimerGroupActivity;
+import de.softinva.multitimer.classes.AppPOJO;
 import de.softinva.multitimer.model.TimerGroup;
 
 public class TimerGroupViewObject {
     public TimerGroup timerGroup;
     public int buttonSrcCompat;
 
-    TimerGroupViewObject(TimerGroup timerGroup){
+    public TimerGroupViewObject(TimerGroup timerGroup){
         this.timerGroup = timerGroup;
+        if (timerGroup.isZipped) {
+            buttonSrcCompat = R.drawable.ic_av_timer_black_24dp;
+        } else {
+            buttonSrcCompat = R.drawable.ic_chevron_right_black_24dp;
+        }
     }
 
     @BindingAdapter("android:src")

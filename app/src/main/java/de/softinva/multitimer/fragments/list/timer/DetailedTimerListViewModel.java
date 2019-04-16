@@ -3,6 +3,7 @@ package de.softinva.multitimer.fragments.list.timer;
 import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import de.softinva.multitimer.classes.AppViewModel;
 import de.softinva.multitimer.model.DetailedTimer;
 import de.softinva.multitimer.model.Timer;
@@ -15,20 +16,16 @@ public class DetailedTimerListViewModel extends AppViewModel {
 
     private MutableLiveData<TreeMap<Integer, DetailedTimer>> timerList;
 
-
-
-    public MutableLiveData<TreeMap<Integer,DetailedTimer>>  getTimerList(Integer timerGroupId) {
+    public MutableLiveData<TreeMap<Integer,DetailedTimer>>  getTimerList(String timerGroupId) {
         if (timerList == null) {
-            timerList = new MutableLiveData<>();
             loadTimerList(timerGroupId);
         }
         return timerList;
     }
 
-    private void loadTimerList(Integer timerGroupId) {
-        TreeMap<Integer, TimerGroup> timerGroupMap =  TimerRepository.getInstance().getTimerGroups().getValue();
-        TimerGroup map = getTimerGroup(timerGroupId, timerGroupMap);
-       this.timerList.setValue(map.timerMap);
+    private void loadTimerList(String timerGroupId) {
+        MutableLiveData<TreeMap<Integer, TimerGroup>> timerGroupMap =  TimerRepository.getInstance().getTimerGroups();
+        timerList = (MutableLiveData<TreeMap<Integer, DetailedTimer>>)Transformations.map(timerGroupMap , timerMap->{return getTimerGroup(timerGroupId, timerMap).timerMap;});
     }
 }
 

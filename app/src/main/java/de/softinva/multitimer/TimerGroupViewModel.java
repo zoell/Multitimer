@@ -14,7 +14,7 @@ import de.softinva.multitimer.utility.UtilityMethods;
 
 public class TimerGroupViewModel extends ActivityViewModel {
     private MutableLiveData<TABS> activeTab;
-    private MutableLiveData<Integer> timerGroupId;
+    private MutableLiveData<String> timerGroupId;
     private MutableLiveData<TimerGroup> timerGroup;
 
     @Override
@@ -26,9 +26,9 @@ public class TimerGroupViewModel extends ActivityViewModel {
     }
 
 
-    public MutableLiveData<Integer> getTimerGroupId() {
+    public MutableLiveData<String> getTimerGroupId() {
         if (timerGroupId == null) {
-            timerGroupId = new MutableLiveData<Integer>();
+            timerGroupId = new MutableLiveData<String>();
         }
         return timerGroupId;
     }

@@ -5,11 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.R;
 import de.softinva.multitimer.TimerGroupViewModel;
 import de.softinva.multitimer.fragments.list.AppList;
+import de.softinva.multitimer.fragments.list.timergroup.TimerGroupViewObject;
+import de.softinva.multitimer.model.DetailedTimer;
+import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.utility.AppRecyclerAdapter;
 
 /**
@@ -28,7 +34,7 @@ public class DetailedTimerList extends AppList {
             TimerGroupViewModel activityModel = ViewModelProviders.of(getActivity()).get(TimerGroupViewModel.class);
             activityModel.getTimerGroupId().observe(this, (groupId) -> {
                 model.getTimerList(groupId).observe(this, (timerList) -> {
-                    recyclerView.setAdapter(new AppRecyclerAdapter(timerList, R.layout.detailed_timer_list_item));
+                    recyclerView.setAdapter(new AppRecyclerAdapter(createViewObject(timerList),this, R.layout.detailed_timer_list_item));
                 });
             });
 
@@ -37,5 +43,15 @@ public class DetailedTimerList extends AppList {
         }
 
         return view;
+    }
+
+    public TreeMap<Integer, DetailedTimerViewObject> createViewObject(TreeMap<Integer, DetailedTimer> detailedTimerTreeMap) {
+        TreeMap<Integer, DetailedTimerViewObject> timerGroupMap = new TreeMap<>();
+        for (Map.Entry<Integer,DetailedTimer>entry : detailedTimerTreeMap.entrySet()) {
+            DetailedTimer detailedTimer =  entry.getValue();
+            DetailedTimerViewObject detailedTimerViewObject = detailedTimer.createViewObject();
+            timerGroupMap.put(entry.getKey(), detailedTimerViewObject);
+        }
+        return timerGroupMap;
     }
 }

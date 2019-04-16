@@ -21,11 +21,11 @@ public class DummyNudelGericht {
 
 
     static {
-        TIMER_NUDELN = new DetailedTimer(0,0, "Nudeln", 480, "Nudeln zum kochen bringen und dann auf mittlere Stufe herunter stellen.", "nudeln.png");
-        TIMER_Tomatensoße = new DetailedTimer(1,0, "Tomatensoße", 480, "Tomatensoße auf mittlerer Stufe erwärmen.", "nudeln.png");
+        TIMER_NUDELN = new DetailedTimer("Nudeln_0","0", "Nudeln", 480, "Nudeln zum kochen bringen und dann auf mittlere Stufe herunter stellen.", "nudeln.png");
+        TIMER_Tomatensoße = new DetailedTimer("Nudeln_1","0", "Tomatensoße", 480, "Tomatensoße auf mittlerer Stufe erwärmen.", "nudeln.png");
         addItemToTimerList(TIMER_NUDELN);
         addItemToTimerList(TIMER_Tomatensoße);
-        TIMER_GROUP = new TimerGroup(0, "Nudeln", false, TIMER_LIST);
+        TIMER_GROUP = new TimerGroup("0", "Nudeln", false, TIMER_LIST);
     }
 
     private static void addItemToTimerList(DetailedTimer timer) {

@@ -1,13 +1,14 @@
 package de.softinva.multitimer.repository;
+import android.content.Context;
 
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
-import de.softinva.multitimer.classes.ActiveTimerMap;
+import de.softinva.multitimer.CountDownService;
+import de.softinva.multitimer.model.RunningTimer;
 import de.softinva.multitimer.model.TempTimer;
-import de.softinva.multitimer.model.Timer;
+
 import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.repository.dummy.DummyNudelGericht;
 import de.softinva.multitimer.repository.dummy.DummyPizza;
@@ -16,56 +17,64 @@ import de.softinva.multitimer.repository.dummy.DummyTempTimer;
 
 
 public class TimerRepository {
-    private MutableLiveData<TreeMap<Integer,TimerGroup>> timerGroup;
-    private MutableLiveData<TreeMap<Integer,TempTimer>> tempTimer;
-    private MutableLiveData<TreeMap<Long, Timer>> runningTimer;
+    protected MutableLiveData<TreeMap<Integer, TimerGroup>> timerGroupMap;
+    protected MutableLiveData<TreeMap<Integer, TempTimer>> tempTimerMap;
+    protected MutableLiveData<TreeMap<Long, RunningTimer>> runningTimerMap;
 
     protected static TimerRepository instance;
 
-    private TimerRepository(){}
-
-    public static TimerRepository getInstance(){
-     if(instance == null){
-         instance = new TimerRepository();
-     }
-     return instance;
+    private TimerRepository() {
     }
-    public MutableLiveData<TreeMap<Integer,TimerGroup>> getTimerGroups() {
 
-        if (this.timerGroup != null) {
-            return this.timerGroup;
+    public static TimerRepository getInstance() {
+        if (instance == null) {
+            instance = new TimerRepository();
+        }
+        return instance;
+    }
+
+    public MutableLiveData<TreeMap<Integer, TimerGroup>> getTimerGroups() {
+
+        if (this.timerGroupMap != null) {
+            return timerGroupMap;
         }
 
-        this.timerGroup = new MutableLiveData<>();
-        TreeMap<Integer,TimerGroup> timerGroupList= new TreeMap<>();
-        timerGroupList.put(0,DummyNudelGericht.TIMER_GROUP);
-        timerGroupList.put(1,DummyPizza.TIMER_GROUP);
-        this.timerGroup.setValue(timerGroupList);
+        timerGroupMap = new MutableLiveData<>();
+        TreeMap<Integer, TimerGroup> timerGroupList = new TreeMap<>();
+        timerGroupList.put(0, DummyNudelGericht.TIMER_GROUP);
+        timerGroupList.put(1, DummyPizza.TIMER_GROUP);
+        timerGroupMap.setValue(timerGroupList);
 
-        return this.timerGroup;
+        return timerGroupMap;
     }
-    public MutableLiveData<TreeMap<Integer,TempTimer>> getTempTimer() {
 
-        if (this.tempTimer != null) {
-            return this.tempTimer;
+    public MutableLiveData<TreeMap<Integer, TempTimer>> getTempTimer() {
+
+        if (this.tempTimerMap != null) {
+            return this.tempTimerMap;
         }
 
-        this.tempTimer = new MutableLiveData<>();
-        this.tempTimer.setValue(DummyTempTimer.TEMP_TIMERS);
+        this.tempTimerMap = new MutableLiveData<>();
+        this.tempTimerMap.setValue(DummyTempTimer.TEMP_TIMERS);
 
-        return this.tempTimer;
+        return this.tempTimerMap;
     }
 
-    public MutableLiveData<TreeMap<Long, Timer>> getRunningTimer() {
-
-        if (this.runningTimer != null) {
-            return this.runningTimer;
+    public MutableLiveData<TreeMap<Long, RunningTimer>> getDummyRunningTimer() {
+        if (runningTimerMap == null) {
+            runningTimerMap = new MutableLiveData<>();
+            runningTimerMap.setValue(DummyRunningTimer.RUNNING_TIMER);
         }
 
-        this.runningTimer = new MutableLiveData<>();
-        this.runningTimer.setValue(DummyRunningTimer.RUNNING_TIMER);
-
-        return this.runningTimer;
+        return runningTimerMap;
     }
+
+    public MutableLiveData<TreeMap<Long, RunningTimer>> getRunningTimerMap() {
+        if (runningTimerMap == null) {
+            runningTimerMap = CountDownService.runningTimerLiveDataMap;
+        }
+        return runningTimerMap;
+    }
+
 
 }

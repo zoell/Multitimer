@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.TimerGroupActivity;
+import de.softinva.multitimer.classes.AppPOJO;
 import de.softinva.multitimer.fragments.list.AppList;
 
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class TimerGroupList extends AppList {
             RecyclerView recyclerView = (RecyclerView) view;
             TimerGroupListViewModel model = ViewModelProviders.of(this).get(TimerGroupListViewModel.class);
             model.getTimerGroupList().observe(this, (timerGroups) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(createViewObject(timerGroups), R.layout.timer_group_list_item));
+                recyclerView.setAdapter(new AppRecyclerAdapter(createViewObject(timerGroups),this, R.layout.timer_group_list_item));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
@@ -42,19 +43,14 @@ public class TimerGroupList extends AppList {
 
         return view;
     }
-
     public TreeMap<Integer, TimerGroupViewObject> createViewObject(TreeMap<Integer, TimerGroup> timerGroups) {
         TreeMap<Integer, TimerGroupViewObject> timerGroupMap = new TreeMap<>();
-        for (Map.Entry<Integer, TimerGroup> entry : timerGroups.entrySet()) {
-            TimerGroup timerGroup = entry.getValue();
-            TimerGroupViewObject timerGroupViewObject = new TimerGroupViewObject(timerGroup);
-            if (timerGroup.isZipped) {
-                timerGroupViewObject.buttonSrcCompat = R.drawable.ic_av_timer_black_24dp;
-            } else {
-                timerGroupViewObject.buttonSrcCompat = R.drawable.ic_chevron_right_black_24dp;
-            }
+        for (Map.Entry<Integer,TimerGroup>entry : timerGroups.entrySet()) {
+            TimerGroup timerGroup =  entry.getValue();
+            TimerGroupViewObject timerGroupViewObject = timerGroup.createViewObject();
             timerGroupMap.put(entry.getKey(), timerGroupViewObject);
         }
         return timerGroupMap;
     }
+
 }

@@ -14,6 +14,7 @@ import de.softinva.multitimer.fragments.list.timergroup.TimerGroupList;
 import de.softinva.multitimer.model.MAIN_ACTIVITY_TABS;
 import de.softinva.multitimer.model.TABS;
 import de.softinva.multitimer.model.TIMER_GROUP_ACTIVITY_TABS;
+import de.softinva.multitimer.repository.dummy.DummyNudelGericht;
 
 
 public class TimerGroupActivity extends AppActivity {
@@ -32,9 +33,9 @@ public class TimerGroupActivity extends AppActivity {
     }
 
     protected void setGroupIdAndTitle() {
-        int groupId = intent.getIntExtra(GROUP_ID, -1);
+        String groupId = intent.getStringExtra(GROUP_ID);
 
-        if (groupId != -1) {
+        if (groupId != "") {
             TimerGroupViewModel model = (TimerGroupViewModel) this.model;
             model.getTimerGroupId().setValue(groupId);
             setTitle(model.getTimerGroup().getValue().title);

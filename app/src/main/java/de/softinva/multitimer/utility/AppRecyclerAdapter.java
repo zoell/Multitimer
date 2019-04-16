@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.BR;
 
@@ -21,12 +22,14 @@ import de.softinva.multitimer.BR;
  * and from generated code after created new class
  */
 public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
-    protected final TreeMap<Object,T> objectList;
+    protected final TreeMap<Object, T> objectList;
     protected final int layoutId;
+    protected LifecycleOwner owner;
 
-    public AppRecyclerAdapter(TreeMap<Object,T> objectList, int layoutId) {
+    public AppRecyclerAdapter(TreeMap<Object, T> objectList, LifecycleOwner owner, int layoutId) {
         this.objectList = objectList;
         this.layoutId = layoutId;
+        this.owner = owner;
     }
 
     public AppViewHolder onCreateViewHolder(ViewGroup parent,
@@ -35,6 +38,7 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
                 LayoutInflater.from(parent.getContext());
         ViewDataBinding binding = DataBindingUtil.inflate(
                 layoutInflater, viewType, parent, false);
+        binding.setLifecycleOwner(owner);
         return new AppViewHolder(binding);
     }
 
@@ -43,6 +47,7 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
         Object obj = getObjForPosition(position);
         holder.bind(obj);
     }
+
     @Override
     public int getItemCount() {
         return objectList.size();
@@ -54,7 +59,7 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
     }
 
     protected T getObjForPosition(int position) {
-       return  this.objectList.get(position);
+        return this.objectList.get(position);
     }
 
 }

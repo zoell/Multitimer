@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.BR;
 import de.softinva.multitimer.classes.OnTimerListInteractionListener;
@@ -22,8 +23,8 @@ import de.softinva.multitimer.fragments.list.AppList;
  * and from generated code after created new class
  */
 public class AppRunningTimerRecyclerAdapter<T> extends AppRecyclerAdapter<T> {
-    public AppRunningTimerRecyclerAdapter(TreeMap<Object,T> objectList, int layoutId) {
-        super(objectList,layoutId);
+    public AppRunningTimerRecyclerAdapter(TreeMap<Object,T> objectList, LifecycleOwner owner, int layoutId) {
+        super(objectList,owner, layoutId);
     }
     @Override
     protected T getObjForPosition(int position) {
