@@ -2,10 +2,9 @@ package de.softinva.multitimer.model;
 
 import java.util.TreeMap;
 
-import de.softinva.multitimer.classes.AppPOJO;
 import de.softinva.multitimer.fragments.list.timergroup.TimerGroupViewObject;
 
-public class TimerGroup implements AppPOJO {
+public class TimerGroup {
     public final String id;
     public final String title;
     public final TreeMap<Integer, RunningTimer> timerMap;
@@ -22,10 +21,5 @@ public class TimerGroup implements AppPOJO {
     @Override
     public String toString() {
         return this.title;
-    }
-
-    @Override
-    public TimerGroupViewObject createViewObject() {
-        return new TimerGroupViewObject(this);
     }
 }

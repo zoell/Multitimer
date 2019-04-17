@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import de.softinva.multitimer.MainActivity;
@@ -12,6 +15,7 @@ import de.softinva.multitimer.R;
 import de.softinva.multitimer.TimerGroupActivity;
 import de.softinva.multitimer.TimerGroupViewModel;
 import de.softinva.multitimer.fragments.list.AppList;
+import de.softinva.multitimer.model.RunningTimer;
 import de.softinva.multitimer.utility.AppRunningTimerRecyclerAdapter;
 
 /**
@@ -30,12 +34,12 @@ public class RunningTimerList extends AppList {
                 TimerGroupViewModel activityModel = ViewModelProviders.of(getActivity()).get(TimerGroupViewModel.class);
                 activityModel.getTimerGroupId().observe(this, (groupId) -> {
                     model.getTimerListForGroup(groupId).observe(this, (timerList) -> {
-                        recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(timerList,this, R.layout.running_timer_list_item));
+                        recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(createViewObject(timerList),this, R.layout.running_timer_list_item));
                     });
                 });
             } else {
                 model.getTimerList().observe(this, (timerList) -> {
-                    recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(timerList, this,R.layout.running_timer_list_item));
+                    recyclerView.setAdapter(new AppRunningTimerRecyclerAdapter(createViewObject(timerList), this,R.layout.running_timer_list_item));
                 });
             }
 
@@ -45,5 +49,15 @@ public class RunningTimerList extends AppList {
         }
 
         return view;
+    }
+
+    public TreeMap<Long, RunningTimerViewObject> createViewObject(TreeMap<Long, RunningTimer> tempTimerTreeMap) {
+        TreeMap<Long, RunningTimerViewObject> runningTimerViewObjectMap = new TreeMap<>();
+        for (Map.Entry<Long, RunningTimer>entry : tempTimerTreeMap.entrySet()) {
+            RunningTimer runningTimer =  entry.getValue();
+            RunningTimerViewObject tempTimerViewObject = new RunningTimerViewObject(runningTimer);
+            runningTimerViewObjectMap.put(entry.getKey(), tempTimerViewObject);
+        }
+        return runningTimerViewObjectMap;
     }
 }

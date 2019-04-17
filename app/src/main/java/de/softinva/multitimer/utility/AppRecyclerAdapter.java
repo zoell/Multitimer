@@ -44,8 +44,8 @@ public class AppRecyclerAdapter<T> extends RecyclerView.Adapter<AppViewHolder> {
 
     public void onBindViewHolder(AppViewHolder holder,
                                  int position) {
-        Object obj = getObjForPosition(position);
-        holder.bind(obj);
+        Object viewObject = getObjForPosition(position);
+        holder.bind(viewObject);
     }
 
     @Override
@@ -72,8 +72,8 @@ class AppViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(Object obj) {
-        binding.setVariable(BR.obj, obj);
+    public void bind(Object viewObject) {
+        binding.setVariable(BR.viewObject, viewObject);
         binding.executePendingBindings();
     }
 }

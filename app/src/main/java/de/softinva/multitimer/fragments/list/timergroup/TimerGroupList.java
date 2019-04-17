@@ -1,18 +1,14 @@
 package de.softinva.multitimer.fragments.list.timergroup;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
-import de.softinva.multitimer.TimerGroupActivity;
-import de.softinva.multitimer.classes.AppPOJO;
 import de.softinva.multitimer.fragments.list.AppList;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 
 import java.util.Map;
@@ -35,7 +31,7 @@ public class TimerGroupList extends AppList {
             RecyclerView recyclerView = (RecyclerView) view;
             TimerGroupListViewModel model = ViewModelProviders.of(this).get(TimerGroupListViewModel.class);
             model.getTimerGroupList().observe(this, (timerGroups) -> {
-                recyclerView.setAdapter(new AppRecyclerAdapter(createViewObject(timerGroups),this, R.layout.timer_group_list_item));
+                recyclerView.setAdapter(new AppRecyclerAdapter(createViewObject(timerGroups), this, R.layout.timer_group_list_item));
             });
         } else {
             logger.error("view not instance of RecyclerView!");
@@ -43,11 +39,12 @@ public class TimerGroupList extends AppList {
 
         return view;
     }
+
     public TreeMap<Integer, TimerGroupViewObject> createViewObject(TreeMap<Integer, TimerGroup> timerGroups) {
         TreeMap<Integer, TimerGroupViewObject> timerGroupMap = new TreeMap<>();
-        for (Map.Entry<Integer,TimerGroup>entry : timerGroups.entrySet()) {
-            TimerGroup timerGroup =  entry.getValue();
-            TimerGroupViewObject timerGroupViewObject = timerGroup.createViewObject();
+        for (Map.Entry<Integer, TimerGroup> entry : timerGroups.entrySet()) {
+            TimerGroup timerGroup = entry.getValue();
+            TimerGroupViewObject timerGroupViewObject = new TimerGroupViewObject(timerGroup);
             timerGroupMap.put(entry.getKey(), timerGroupViewObject);
         }
         return timerGroupMap;

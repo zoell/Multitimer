@@ -1,4 +1,4 @@
-package de.softinva.multitimer.fragments.list.timer;
+package de.softinva.multitimer.fragments.list.running;
 
 import android.view.View;
 
@@ -6,9 +6,9 @@ import de.softinva.multitimer.CountDownService;
 import de.softinva.multitimer.classes.AppViewObject;
 import de.softinva.multitimer.model.RunningTimer;
 
-public class DetailedTimerViewObject extends AppViewObject<RunningTimer> {
+public class RunningTimerViewObject extends AppViewObject<RunningTimer> {
 
-    public DetailedTimerViewObject(RunningTimer runningTimer) {
+    public RunningTimerViewObject(RunningTimer runningTimer) {
         super(runningTimer);
     }
 

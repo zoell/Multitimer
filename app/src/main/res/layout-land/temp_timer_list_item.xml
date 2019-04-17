@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="obj" type="de.softinva.multitimer.model.TempTimer" />
+        <variable name="viewObject" type="de.softinva.multitimer.fragments.list.temp.TempTimerViewObject" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/text_margin"
                     android:layout_weight="2"
-                    android:text="@{obj.title}"
+                    android:text="@{viewObject.obj.timer.title}"
                     android:textStyle="bold" />
 
                 <ImageView

@@ -1,7 +1,5 @@
 package de.softinva.multitimer.model;
 
-import de.softinva.multitimer.fragments.list.timer.DetailedTimerViewObject;
-
 public class DetailedTimer extends Timer {
     public final String description;
 
@@ -15,8 +13,4 @@ public class DetailedTimer extends Timer {
         return this.title;
     }
 
-    @Override
-    public DetailedTimerViewObject createViewObject() {
-        return new DetailedTimerViewObject(this);
-    }
 }

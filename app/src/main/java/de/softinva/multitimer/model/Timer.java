@@ -3,9 +3,7 @@ package de.softinva.multitimer.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import de.softinva.multitimer.classes.AppPOJO;
-
-public class Timer implements Parcelable, AppPOJO {
+public class Timer implements Parcelable {
     public final String id;
     public final String groupId;
     public final String title;
@@ -60,11 +58,6 @@ public class Timer implements Parcelable, AppPOJO {
 
     public Timer toTimer(){
         return new Timer(id, groupId, title, durationInSec, imageName);
-    }
-
-    @Override
-    public Object createViewObject() {
-        return null;
     }
 
     @Override

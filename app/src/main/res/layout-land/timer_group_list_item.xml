@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="obj" type="de.softinva.multitimer.fragments.list.timergroup.TimerGroupViewObject" />
+        <variable name="viewObject" type="de.softinva.multitimer.fragments.list.timergroup.TimerGroupViewObject" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/text_margin"
                     android:layout_weight="2"
-                    android:text="@{obj.timerGroup.title}"
+                    android:text="@{viewObject.obj.title}"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -60,8 +60,8 @@
                     android:layout_marginRight="@dimen/item_margin"
                     android:contentDescription="Image"
                     android:tint="@color/colorAccent"
-                    android:src="@{obj.buttonSrcCompat}"
-                    android:onClickListener="@{obj::onClickButton}"/>
+                    android:src="@{viewObject.buttonSrcCompat}"
+                    android:onClickListener="@{viewObject::onClickButton}"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

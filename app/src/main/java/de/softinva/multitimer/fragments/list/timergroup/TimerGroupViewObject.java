@@ -7,15 +7,15 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 import de.softinva.multitimer.R;
 import de.softinva.multitimer.TimerGroupActivity;
-import de.softinva.multitimer.classes.AppPOJO;
+import de.softinva.multitimer.classes.AppViewObject;
 import de.softinva.multitimer.model.TimerGroup;
 
-public class TimerGroupViewObject {
-    public TimerGroup timerGroup;
+public class TimerGroupViewObject extends AppViewObject<TimerGroup> {
+
     public int buttonSrcCompat;
 
     public TimerGroupViewObject(TimerGroup timerGroup){
-        this.timerGroup = timerGroup;
+        super(timerGroup);
         if (timerGroup.isZipped) {
             buttonSrcCompat = R.drawable.ic_av_timer_black_24dp;
         } else {
@@ -39,7 +39,7 @@ public class TimerGroupViewObject {
 
     public void onClickButton(View view) {
             Intent intent = new Intent(view.getContext(), TimerGroupActivity.class);
-            intent.putExtra(TimerGroupActivity.GROUP_ID, timerGroup.id);
+            intent.putExtra(TimerGroupActivity.GROUP_ID, obj.id);
             view.getContext().startActivity(intent);
 
     }

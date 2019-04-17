@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="obj" type="de.softinva.multitimer.fragments.list.timer.DetailedTimerViewObject" />
+        <variable name="viewObject" type="de.softinva.multitimer.fragments.list.timer.DetailedTimerViewObject" />
     </data>
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:layout_weight="2"
-            android:text="@{obj.timer.title}" />
+            android:text="@{viewObject.obj.timer.title}" />
 
         <ImageView
             android:id="@+id/icon"
@@ -41,7 +41,7 @@
             android:contentDescription="Image"
             android:tint="@color/colorAccent"
             app:srcCompat="@drawable/ic_av_timer_black_24dp"
-            android:onClick="@{obj::onClickButton}"/>
+            android:onClick="@{viewObject::onClickButton}"/>
 
     </LinearLayout>
 </layout>

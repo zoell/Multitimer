@@ -15,6 +15,7 @@ import de.softinva.multitimer.TimerGroupViewModel;
 import de.softinva.multitimer.fragments.list.AppList;
 import de.softinva.multitimer.fragments.list.timergroup.TimerGroupViewObject;
 import de.softinva.multitimer.model.DetailedTimer;
+import de.softinva.multitimer.model.RunningTimer;
 import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.utility.AppRecyclerAdapter;
 
@@ -45,11 +46,11 @@ public class DetailedTimerList extends AppList {
         return view;
     }
 
-    public TreeMap<Integer, DetailedTimerViewObject> createViewObject(TreeMap<Integer, DetailedTimer> detailedTimerTreeMap) {
+    public TreeMap<Integer, DetailedTimerViewObject> createViewObject(TreeMap<Integer, RunningTimer> detailedTimerTreeMap) {
         TreeMap<Integer, DetailedTimerViewObject> timerGroupMap = new TreeMap<>();
-        for (Map.Entry<Integer,DetailedTimer>entry : detailedTimerTreeMap.entrySet()) {
-            DetailedTimer detailedTimer =  entry.getValue();
-            DetailedTimerViewObject detailedTimerViewObject = detailedTimer.createViewObject();
+        for (Map.Entry<Integer,RunningTimer>entry : detailedTimerTreeMap.entrySet()) {
+            RunningTimer runningTimer =  entry.getValue();
+            DetailedTimerViewObject detailedTimerViewObject = new DetailedTimerViewObject(runningTimer);
             timerGroupMap.put(entry.getKey(), detailedTimerViewObject);
         }
         return timerGroupMap;

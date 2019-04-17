@@ -7,7 +7,6 @@ import java.util.TreeMap;
 import androidx.lifecycle.MutableLiveData;
 import de.softinva.multitimer.CountDownService;
 import de.softinva.multitimer.model.RunningTimer;
-import de.softinva.multitimer.model.TempTimer;
 
 import de.softinva.multitimer.model.TimerGroup;
 import de.softinva.multitimer.repository.dummy.DummyNudelGericht;
@@ -18,7 +17,7 @@ import de.softinva.multitimer.repository.dummy.DummyTempTimer;
 
 public class TimerRepository {
     protected MutableLiveData<TreeMap<Integer, TimerGroup>> timerGroupMap;
-    protected MutableLiveData<TreeMap<Integer, TempTimer>> tempTimerMap;
+    protected MutableLiveData<TreeMap<Integer, RunningTimer>> tempTimerMap;
     protected MutableLiveData<TreeMap<Long, RunningTimer>> runningTimerMap;
 
     protected static TimerRepository instance;
@@ -48,7 +47,7 @@ public class TimerRepository {
         return timerGroupMap;
     }
 
-    public MutableLiveData<TreeMap<Integer, TempTimer>> getTempTimer() {
+    public MutableLiveData<TreeMap<Integer, RunningTimer>> getTempTimer() {
 
         if (this.tempTimerMap != null) {
             return this.tempTimerMap;
