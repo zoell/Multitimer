@@ -54,7 +54,7 @@ public class DetailedTimerListViewModel extends AppViewModel {
 
             }
         }
-        throw new Error("no timer found in tList for running timer!");
+
     }
 }
 
