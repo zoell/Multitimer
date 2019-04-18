@@ -39,7 +39,7 @@
             android:layout_marginEnd="@dimen/item_margin"
             android:layout_marginRight="@dimen/item_margin"
             android:contentDescription="Image"
-            android:tint="@color/colorAccent"
+            android:tint="@{viewObject.obj.isRunning?@color/colorPrimary:@color/colorAccent}"
             app:srcCompat="@drawable/ic_av_timer_black_24dp"
             android:onClick="@{viewObject::onClickButton}"/>
 

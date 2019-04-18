@@ -40,6 +40,13 @@ public class CountDownService extends Service {
         context.startService(intent);
     }
 
+    public static void cancelTimer(Timer timer, Context context) {
+        Intent intent = new Intent(context, CountDownService.class);
+        intent.setAction(CountDownService.ACTION_CANCEL_TIMER);
+        intent.putExtra(CountDownService.TIMER, timer);
+        context.startService(intent);
+    }
+
     static {
         runningTimerByFinishTimeMap.setValue(new TreeMap<>());
         runningTimerByIDMap.setValue(new TreeMap<>());
@@ -88,7 +95,6 @@ public class CountDownService extends Service {
     protected void addNewTimer(Timer timer) {
         if (runningTimerMapByID.get(timer.id) == null) {
             RunningTimer runningTimer = new RunningTimer(timer);
-            runningTimerMapByID.put(timer.id, runningTimer);
 
             AppCountDown appCountDown = new AppCountDown(runningTimer);
             appCountDownTimerTreeMap.put(timer.id, appCountDown);
@@ -99,6 +105,7 @@ public class CountDownService extends Service {
                 throw new Error("return value should be null as no Timer should exists!");
             }
 
+            runningTimerMapByID.put(timer.id, runningTimer);
             updateLiveData();
         } else {
             throw new Error("running Timer is not null, but should be created new!");
@@ -108,19 +115,19 @@ public class CountDownService extends Service {
     protected void cancelTimer(Timer timer) {
         RunningTimer runningTimer = runningTimerMapByID.get(timer.id);
         if (runningTimer != null) {
-            appCountDownTimerTreeMap.get(timer.id).cancel();
-
             runningTimerMapByID.remove(timer.id);
-
-            AppCountDown appCountDown = appCountDownTimerTreeMap.remove(timer.id);
-            if (appCountDown == null) {
-                throw new Error("return value should not be null as AppCountDown should exists!");
-            }
 
             Long finishTimeInSec = runningTimer.getFinishTimeInSec();
             RunningTimer rtimer = runningTimerMapByFinishTime.remove(finishTimeInSec);
             if (rtimer == null) {
                 throw new Error("return value should not be null as Timer should exists!");
+            }
+
+            appCountDownTimerTreeMap.get(timer.id).cancel();
+
+            AppCountDown appCountDown = appCountDownTimerTreeMap.remove(timer.id);
+            if (appCountDown == null) {
+                throw new Error("return value should not be null as AppCountDown should exists!");
             }
 
             updateLiveData();
