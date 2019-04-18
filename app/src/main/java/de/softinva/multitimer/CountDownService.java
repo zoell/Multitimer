@@ -7,7 +7,9 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import java.util.TreeMap;
+
 import androidx.lifecycle.MutableLiveData;
+
 import de.softinva.multitimer.classes.AppCountDown;
 import de.softinva.multitimer.model.RunningTimer;
 import de.softinva.multitimer.model.Timer;
@@ -20,7 +22,8 @@ public class CountDownService extends Service {
     static final String ACTION_START_TIMER = "de.softinva.multitimer.CountDownService.ActionStartTimer";
     static final String ACTION_CANCEL_TIMER = "de.softinva.multitimer.CountDownService.ActionCancelTimer";
 
-    public static MutableLiveData<TreeMap<Long, RunningTimer>> runningTimerLiveDataMap = new MutableLiveData<>();
+    public static MutableLiveData<TreeMap<Long, RunningTimer>> runningTimerByFinishTimeMap = new MutableLiveData<>();
+    public static MutableLiveData<TreeMap<String, RunningTimer>> runningTimerByIDMap = new MutableLiveData<>();
 
     protected final IBinder binder = new LocalBinder();
     protected final AppLogger logger = UtilityMethods.createLogger(this);
@@ -30,11 +33,16 @@ public class CountDownService extends Service {
     protected TreeMap<String, RunningTimer> runningTimerMapByID;
     protected TreeMap<String, AppCountDown> appCountDownTimerTreeMap;
 
-    public static  void startNewTimer(Timer timer, Context context) {
+    public static void startNewTimer(Timer timer, Context context) {
         Intent intent = new Intent(context, CountDownService.class);
         intent.setAction(CountDownService.ACTION_START_TIMER);
         intent.putExtra(CountDownService.TIMER, timer);
         context.startService(intent);
+    }
+
+    static {
+        runningTimerByFinishTimeMap.setValue(new TreeMap<>());
+        runningTimerByIDMap.setValue(new TreeMap<>());
     }
 
     @Override
@@ -42,6 +50,7 @@ public class CountDownService extends Service {
         runningTimerMapByFinishTime = new TreeMap<>();
         runningTimerMapByID = new TreeMap<>();
         appCountDownTimerTreeMap = new TreeMap<>();
+
     }
 
 
@@ -90,7 +99,7 @@ public class CountDownService extends Service {
                 throw new Error("return value should be null as no Timer should exists!");
             }
 
-            runningTimerLiveDataMap.setValue(runningTimerMapByFinishTime);
+            updateLiveData();
         } else {
             throw new Error("running Timer is not null, but should be created new!");
         }
@@ -101,21 +110,27 @@ public class CountDownService extends Service {
         if (runningTimer != null) {
             appCountDownTimerTreeMap.get(timer.id).cancel();
 
+            runningTimerMapByID.remove(timer.id);
+
             AppCountDown appCountDown = appCountDownTimerTreeMap.remove(timer.id);
             if (appCountDown == null) {
                 throw new Error("return value should not be null as AppCountDown should exists!");
             }
 
             Long finishTimeInSec = runningTimer.getFinishTimeInSec();
-            runningTimerMapByID.remove(timer.id);
             RunningTimer rtimer = runningTimerMapByFinishTime.remove(finishTimeInSec);
             if (rtimer == null) {
                 throw new Error("return value should not be null as Timer should exists!");
             }
 
-            runningTimerLiveDataMap.setValue(runningTimerMapByFinishTime);
+            updateLiveData();
         } else {
             throw new Error("No Timer in running map with id: " + timer.id);
         }
+    }
+
+    protected void updateLiveData() {
+        runningTimerByFinishTimeMap.setValue(runningTimerMapByFinishTime);
+        runningTimerByIDMap.setValue(runningTimerMapByID);
     }
 }

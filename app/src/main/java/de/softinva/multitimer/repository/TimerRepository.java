@@ -1,10 +1,12 @@
 package de.softinva.multitimer.repository;
-import android.content.Context;
 
 
+import java.util.Map;
 import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
+
 import de.softinva.multitimer.CountDownService;
 import de.softinva.multitimer.model.RunningTimer;
 
@@ -18,7 +20,8 @@ import de.softinva.multitimer.repository.dummy.DummyTempTimer;
 public class TimerRepository {
     protected MutableLiveData<TreeMap<Integer, TimerGroup>> timerGroupMap;
     protected MutableLiveData<TreeMap<Integer, RunningTimer>> tempTimerMap;
-    protected MutableLiveData<TreeMap<Long, RunningTimer>> runningTimerMap;
+    protected MutableLiveData<TreeMap<Long, RunningTimer>> runningTimerByFinishTimeMap;
+    protected MutableLiveData<TreeMap<String, RunningTimer>> runningTimerByIDMap;
 
     protected static TimerRepository instance;
 
@@ -47,6 +50,12 @@ public class TimerRepository {
         return timerGroupMap;
     }
 
+    public MutableLiveData<TimerGroup> getTimerGroup(String groupId) {
+        return (MutableLiveData<TimerGroup>) Transformations.map(getTimerGroups(), timerGroups ->{
+            return getTimerGroup(groupId, timerGroups);
+        });
+    }
+
     public MutableLiveData<TreeMap<Integer, RunningTimer>> getTempTimer() {
 
         if (this.tempTimerMap != null) {
@@ -60,20 +69,35 @@ public class TimerRepository {
     }
 
     public MutableLiveData<TreeMap<Long, RunningTimer>> getDummyRunningTimer() {
-        if (runningTimerMap == null) {
-            runningTimerMap = new MutableLiveData<>();
-            runningTimerMap.setValue(DummyRunningTimer.RUNNING_TIMER);
+        if (runningTimerByFinishTimeMap == null) {
+            runningTimerByFinishTimeMap = new MutableLiveData<>();
+            runningTimerByFinishTimeMap.setValue(DummyRunningTimer.RUNNING_TIMER);
         }
 
-        return runningTimerMap;
+        return runningTimerByFinishTimeMap;
     }
 
-    public MutableLiveData<TreeMap<Long, RunningTimer>> getRunningTimerMap() {
-        if (runningTimerMap == null) {
-            runningTimerMap = CountDownService.runningTimerLiveDataMap;
+    public MutableLiveData<TreeMap<Long, RunningTimer>> getRunningTimerByFinishTimeMap() {
+        if (runningTimerByFinishTimeMap == null) {
+            runningTimerByFinishTimeMap = CountDownService.runningTimerByFinishTimeMap;
         }
-        return runningTimerMap;
+        return runningTimerByFinishTimeMap;
+    }
+    public MutableLiveData<TreeMap<String, RunningTimer>> getRunningTimerByIDMap() {
+        if (runningTimerByIDMap == null) {
+            runningTimerByIDMap = CountDownService.runningTimerByIDMap;
+        }
+        return runningTimerByIDMap;
     }
 
+    protected TimerGroup getTimerGroup(String timerGroupId, TreeMap<Integer, TimerGroup> timerGroupMap) {
+        for (Map.Entry<Integer, TimerGroup> entry : timerGroupMap.entrySet()) {
+            String groupId = entry.getValue().id;
+            if (groupId.equals(timerGroupId)) {
+                return entry.getValue();
+            }
+        }
+        throw new Error("Timer Group with Id " + timerGroupId + " not found");
+    }
 
 }

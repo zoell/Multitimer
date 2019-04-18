@@ -34,15 +34,8 @@ public class TimerGroupViewModel extends ActivityViewModel {
     }
     public MutableLiveData<TimerGroup> getTimerGroup() {
         if (timerGroup == null) {
-            timerGroup = new MutableLiveData<TimerGroup>();
-            loadTimerList();
+            timerGroup = TimerRepository.getInstance().getTimerGroup(timerGroupId.getValue());
         }
         return timerGroup;
-    }
-
-    private void loadTimerList() {
-        TreeMap<Integer, TimerGroup> timerGroupMap =  TimerRepository.getInstance().getTimerGroups().getValue();
-        TimerGroup timerGroup = UtilityMethods.getTimerGroup(this.timerGroupId.getValue(), timerGroupMap);
-        this.timerGroup.setValue(timerGroup);
     }
 }

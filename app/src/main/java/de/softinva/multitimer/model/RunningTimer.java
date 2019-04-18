@@ -5,7 +5,7 @@ import java.util.Date;
 import androidx.lifecycle.MutableLiveData;
 
 
-public class RunningTimer{
+public class RunningTimer {
     protected Timer timer;
     protected Long finishTimeInSec;
     protected MutableLiveData<Long> countDownInSec;
@@ -16,8 +16,16 @@ public class RunningTimer{
         countDownInSec = new MutableLiveData<>();
     }
 
+    public boolean isRunning() {
+        return isRunning;
+    }
+
     public Timer getTimer() {
         return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
     }
 
     public MutableLiveData<Long> getCountDownInSec() {

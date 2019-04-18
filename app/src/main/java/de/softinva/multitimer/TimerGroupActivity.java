@@ -38,7 +38,10 @@ public class TimerGroupActivity extends AppActivity {
         if (groupId != "") {
             TimerGroupViewModel model = (TimerGroupViewModel) this.model;
             model.getTimerGroupId().setValue(groupId);
-            setTitle(model.getTimerGroup().getValue().title);
+            model.getTimerGroup().observe(this, timerGroup->{
+                setTitle(timerGroup.title);
+            });
+
         } else {
             throw new Error("groupId is -1!");
         }
