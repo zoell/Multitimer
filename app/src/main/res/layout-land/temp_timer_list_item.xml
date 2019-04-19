@@ -51,16 +51,14 @@
                     android:text="@{viewObject.obj.timer.title}"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/icon"
+                <de.softinva.multitimer.viewcomponents.StartStopTimerButton
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/item_margin"
                     android:layout_marginRight="@dimen/item_margin"
-                    android:contentDescription="Image"
-                    android:tint="@color/colorAccent"
-                    app:srcCompat="@drawable/ic_av_timer_black_24dp" />
+                    app:isRunning="@{viewObject.obj.isRunning}"
+                    app:timer="@{viewObject.obj.timer.toTimer()}"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
