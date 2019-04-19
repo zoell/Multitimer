@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable name="viewObject" type="de.softinva.multitimer.fragments.list.timer.DetailedTimerViewObject" />
     </data>
 
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
@@ -31,17 +31,13 @@
             android:layout_weight="2"
             android:text="@{viewObject.obj.timer.title}" />
 
-        <ImageView
-            android:id="@+id/icon"
+        <de.softinva.multitimer.viewcomponents.StartStopTimerButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/item_margin"
             android:layout_marginRight="@dimen/item_margin"
-            android:contentDescription="Image"
-            android:tint="@{viewObject.obj.isRunning?@color/colorPrimary:@color/colorAccent}"
-            app:srcCompat="@drawable/ic_av_timer_black_24dp"
-            android:onClick="@{viewObject::onClickButton}"/>
-
+            app:isRunning="@{viewObject.obj.isRunning}"
+            app:timer="@{viewObject.obj.timer.toTimer()}"/>
     </LinearLayout>
 </layout>

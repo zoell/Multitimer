@@ -12,13 +12,4 @@ public class DetailedTimerViewObject extends AppViewObject<RunningTimer> {
         super(runningTimer);
     }
 
-    public void onClickButton(View view) {
-        if(obj.isRunning()){
-            CountDownService.cancelTimer(obj.getTimer().toTimer(), view.getContext());
-
-        }else{
-            CountDownService.startNewTimer(obj.getTimer().toTimer(), view.getContext());
-        }
-
-    }
 }
