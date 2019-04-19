@@ -12,7 +12,4 @@ public class TempTimerViewObject extends AppViewObject<RunningTimer> {
         super(runningTimer);
     }
 
-    public void onClickButton(View view) {
-        CountDownService.startNewTimer(obj.getTimer().toTimer(), view.getContext());
-    }
 }

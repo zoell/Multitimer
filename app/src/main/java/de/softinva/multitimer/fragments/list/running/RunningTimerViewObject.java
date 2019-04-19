@@ -11,8 +11,5 @@ public class RunningTimerViewObject extends AppViewObject<RunningTimer> {
     public RunningTimerViewObject(RunningTimer runningTimer) {
         super(runningTimer);
     }
-
-    public void onClickButton(View view) {
-        CountDownService.startNewTimer(obj.getTimer().toTimer(), view.getContext());
-    }
+    
 }
