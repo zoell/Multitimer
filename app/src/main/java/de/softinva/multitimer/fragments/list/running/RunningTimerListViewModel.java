@@ -5,13 +5,12 @@ import java.util.TreeMap;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
-import de.softinva.multitimer.classes.AppViewModel;
+import de.softinva.multitimer.classes.FragmentViewModel;
 import de.softinva.multitimer.model.RunningTimer;
 import de.softinva.multitimer.model.Timer;
 import de.softinva.multitimer.repository.TimerRepository;
-import de.softinva.multitimer.utility.UtilityMethods;
 
-public class RunningTimerListViewModel extends AppViewModel {
+public class RunningTimerListViewModel extends FragmentViewModel {
 
     private MutableLiveData<TreeMap<Long, RunningTimer>> timerList;
     private MutableLiveData<TreeMap<Long, RunningTimer>> timerListForGroup;

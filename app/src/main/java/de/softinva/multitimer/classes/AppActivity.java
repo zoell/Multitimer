@@ -8,9 +8,11 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import de.softinva.multitimer.R;
+import de.softinva.multitimer.utility.AppLogger;
 
 public abstract class AppActivity extends AppCompatActivity {
     public static final String  ACTIVE_TAB= "de.softinva.multitimer.activeTab";
+    protected AppLogger logger = new AppLogger(this);
     protected ActivityViewModel model;
     protected Intent intent;
     @Override
